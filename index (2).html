@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Valentin Angenot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream:   #f8f5f0;
+      --cream2:  #f0ece4;
+      --ink:     #18181b;
+      --ink2:    #3f3f46;
+      --muted:   #71717a;
+      --gold:    #9a7f4f;
+      --gold2:   #b8973d;
+      --gold-bg: rgba(154,127,79,0.08);
+      --gold-bd: rgba(154,127,79,0.2);
+      --line:    rgba(24,24,27,0.1);
+      --white:   #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 4rem;
+      background: rgba(248,245,240,0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 500;
+      color: var(--ink); text-decoration: none; letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; align-items: center; }
+    .nav-links a {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cv {
+      padding: 0.42rem 1.1rem;
+      border: 1px solid var(--gold);
+      color: var(--gold) !important;
+      border-radius: 2px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cv:hover { background: var(--gold-bg) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 0 4rem; padding-top: 5rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 5rem;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+    }
+    .hero-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.8rem;
+      opacity: 0; animation: fadeUp 0.7s ease forwards 0.15s;
+    }
+    /* NAME + PHOTO row */
+    .hero-name-row {
+      display: flex; align-items: center; gap: 2rem;
+      opacity: 0; animation: fadeUp 0.7s ease forwards 0.3s;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.4rem, 5.5vw, 5.8rem);
+      font-weight: 500; line-height: 1.0; letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .hero-name em { font-style: italic; color: var(--gold2); }
+    /* Photo slot */
+    .hero-photo {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--gold-bd);
+      flex-shrink: 0;
+      background: var(--cream2);
+      position: relative;
+    }
+    .hero-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .hero-photo-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.3rem; color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.5rem; letter-spacing: 0.1em;
+      text-transform: uppercase; text-align: center;
+      padding: 0.5rem;
+    }
+    .hero-photo-placeholder .ph-ico { font-size: 1.4rem; opacity: 0.5; }
+
+    .hero-role {
+      margin-top: 1.3rem;
+      font-size: 1.05rem; font-weight: 400; color: var(--ink2); line-height: 1.7;
+      max-width: 560px;
+      opacity: 0; animation: fadeUp 0.7s ease forwards 0.45s;
+    }
+
+    /* CFA badge — prominent */
+    .cfa-badge {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      margin-top: 1.5rem;
+      padding: 0.55rem 1.2rem;
+      background: var(--gold-bg);
+      border: 1px solid var(--gold-bd);
+      border-radius: 3px;
+      opacity: 0; animation: fadeUp 0.7s ease forwards 0.58s;
+    }
+    .cfa-badge .cfa-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .cfa-badge .cfa-value {
+      font-size: 0.88rem; font-weight: 600; color: var(--gold2);
+    }
+
+    .hero-chips {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem;
+      opacity: 0; animation: fadeUp 0.7s ease forwards 0.7s;
+    }
+    .chip {
+      padding: 0.3rem 0.85rem;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      font-size: 0.68rem; font-weight: 500; color: var(--ink2);
+    }
+
+    .hero-actions {
+      display: flex; gap: 1rem; margin-top: 2rem;
+      opacity: 0; animation: fadeUp 0.7s ease forwards 0.85s;
+    }
+    .btn-primary {
+      padding: 0.78rem 1.9rem;
+      background: var(--ink); color: var(--cream);
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none;
+      border-radius: 2px; transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.82; transform: translateY(-2px); }
+    .btn-outline {
+      padding: 0.78rem 1.9rem;
+      border: 1px solid var(--line); background: transparent;
+      color: var(--ink2); font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; border-radius: 2px; transition: all 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--ink); color: var(--ink); }
+
+    /* Hero right — key numbers */
+    .hero-numbers {
+      display: flex; flex-direction: column; gap: 0;
+      border: 1px solid var(--line);
+      border-radius: 4px; overflow: hidden;
+      opacity: 0; animation: fadeLeft 0.8s ease forwards 0.9s;
+      min-width: 230px;
+    }
+    .hero-num-card {
+      padding: 1.5rem 1.8rem;
+      border-bottom: 1px solid var(--line);
+      background: var(--white);
+      transition: background 0.2s;
+      cursor: default;
+    }
+    .hero-num-card:last-child { border-bottom: none; }
+    .hero-num-card:hover { background: var(--cream2); }
+    .hero-num-card.clickable { cursor: pointer; }
+    .hn-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem; font-weight: 500; line-height: 1; color: var(--gold2);
+    }
+    .hn-val.prize { font-size: 1.6rem; }
+    .hn-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem; color: var(--muted); letter-spacing: 0.1em;
+      text-transform: uppercase; margin-top: 0.4rem; line-height: 1.55;
+    }
+
+    /* ── SECTIONS BASE ── */
+    section { padding: 6rem 4rem; position: relative; }
+    .sec-hd {
+      display: flex; align-items: center; gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+    .sec-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem; color: var(--gold); letter-spacing: 0.15em;
+      white-space: nowrap;
+    }
+    .sec-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      font-weight: 500; color: var(--ink); letter-spacing: -0.01em;
+    }
+    .sec-line { flex: 1; height: 1px; background: var(--line); }
+
+    /* ── ABOUT ── */
+    #about { background: var(--ink); }
+    #about .sec-title { color: var(--cream); }
+    #about .sec-num { color: var(--gold2); }
+    #about .sec-line { background: rgba(248,245,240,0.1); }
+    .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 5rem; align-items: start; }
+    .about-text p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 400; color: rgba(248,245,240,0.78);
+      line-height: 1.9; margin-bottom: 1.1rem;
+    }
+    .about-text p strong { color: var(--cream); font-weight: 700; }
+    .skills-table { border: 1px solid rgba(248,245,240,0.1); border-radius: 3px; overflow: hidden; }
+    .skill-row {
+      display: grid; grid-template-columns: 100px 1fr;
+      border-bottom: 1px solid rgba(248,245,240,0.07);
+      transition: background 0.2s;
+    }
+    .skill-row:last-child { border-bottom: none; }
+    .skill-row:hover { background: rgba(248,245,240,0.04); }
+    .skill-key {
+      padding: 0.9rem 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem; color: var(--gold2); letter-spacing: 0.1em;
+      text-transform: uppercase; border-right: 1px solid rgba(248,245,240,0.07);
+      display: flex; align-items: center;
+    }
+    .skill-val {
+      padding: 0.9rem 1rem;
+      font-size: 0.8rem; color: rgba(248,245,240,0.5); line-height: 1.5;
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--cream); }
+    .exp-item {
+      display: grid; grid-template-columns: 155px 1fr;
+      gap: 2.5rem; padding: 2rem 0;
+      border-bottom: 1px solid var(--line);
+      position: relative; transition: padding-left 0.25s;
+    }
+    .exp-item::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 2px; background: transparent; transition: background 0.25s;
+    }
+    .exp-item:hover { padding-left: 1rem; }
+    .exp-item:hover::before { background: var(--gold2); }
+    .exp-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem; color: var(--muted); letter-spacing: 0.06em;
+      line-height: 1.8; padding-top: 0.2rem;
+    }
+    .exp-title { font-size: 0.98rem; font-weight: 600; color: var(--ink); }
+    .exp-org {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem; color: var(--gold); letter-spacing: 0.08em; margin-top: 0.2rem;
+    }
+    .exp-desc { font-size: 0.85rem; color: var(--ink2); line-height: 1.75; margin-top: 0.55rem; max-width: 560px; }
+    .tag {
+      display: inline-block; margin: 0.45rem 0.25rem 0 0;
+      padding: 0.2rem 0.6rem;
+      background: var(--gold-bg); color: var(--gold);
+      font-size: 0.6rem; font-weight: 600; letter-spacing: 0.07em;
+      text-transform: uppercase; border-radius: 2px;
+      border: 1px solid var(--gold-bd);
+    }
+
+    /* ── AWARDS ── */
+    #achievements { background: var(--cream2); }
+    .awards-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+    .award-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 4px; padding: 2.2rem;
+      border-top: 3px solid var(--gold);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .award-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.07); }
+    /* Jury Prize card — featured */
+    .award-card.featured {
+      border-top-color: var(--gold2);
+      background: linear-gradient(135deg, #fff 60%, rgba(184,151,61,0.05));
+    }
+    .award-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .award-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 500; color: var(--ink); margin-bottom: 0.6rem; }
+    .award-body { font-size: 0.82rem; color: var(--ink2); line-height: 1.7; }
+    .award-link {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      margin-top: 1rem;
+      padding: 0.45rem 1rem;
+      background: var(--gold-bg); border: 1px solid var(--gold-bd);
+      border-radius: 2px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem; color: var(--gold2); text-decoration: none;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .award-link:hover { background: rgba(154,127,79,0.15); }
+
+    /* ── EDUCATION ── */
+    #education { background: var(--ink); }
+    #education .sec-title { color: var(--cream); }
+    #education .sec-num { color: var(--gold2); }
+    #education .sec-line { background: rgba(248,245,240,0.1); }
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .edu-card {
+      border: 1px solid rgba(248,245,240,0.1);
+      border-radius: 4px; padding: 1.8rem;
+      position: relative; overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .edu-card:hover { border-color: rgba(184,151,61,0.35); }
+    .edu-year {
+      position: absolute; right: 1rem; bottom: 0.5rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem; font-weight: 700;
+      color: rgba(184,151,61,0.06); line-height: 1; pointer-events: none;
+    }
+    .edu-school {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem; color: var(--gold2); letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .edu-degree {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 400; color: var(--cream);
+      margin-top: 0.5rem; line-height: 1.45;
+    }
+    .edu-period {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem; color: rgba(248,245,240,0.3); margin-top: 0.5rem; letter-spacing: 0.08em;
+    }
+    .edu-note { font-size: 0.73rem; color: var(--gold2); margin-top: 0.4rem; font-style: italic; }
+
+    /* ── PUBLICATIONS ── */
+    #publications { background: var(--cream); }
+    .pub-list { display: flex; flex-direction: column; gap: 1rem; }
+    .pub-card {
+      display: flex; gap: 1.5rem; align-items: flex-start;
+      background: var(--white); border: 1px solid var(--line);
+      border-left: 3px solid transparent;
+      border-radius: 3px; padding: 1.6rem 1.8rem;
+      transition: border-color 0.2s;
+    }
+    .pub-card:hover { border-left-color: var(--gold2); }
+    .pub-idx {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem; color: var(--gold); padding-top: 0.25rem; white-space: nowrap;
+    }
+    .pub-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 400; color: var(--ink); line-height: 1.45;
+    }
+    .pub-meta { font-size: 0.75rem; color: var(--muted); margin-top: 0.4rem; }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--cream2); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+    .project-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 4px; padding: 2rem;
+      display: flex; flex-direction: column; gap: 0.8rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(0,0,0,0.06); }
+    .project-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem; color: var(--gold); letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 500; color: var(--ink); line-height: 1.4;
+    }
+    .project-desc {
+      font-size: 0.83rem; color: var(--ink2); line-height: 1.7; flex: 1;
+    }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      margin-top: 0.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem; color: var(--gold2); text-decoration: none;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      border-bottom: 1px solid var(--gold-bd);
+      padding-bottom: 1px; width: fit-content;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .project-link:hover { color: var(--ink); border-color: var(--ink); }
+    /* Add-project note */
+    .project-add-note {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em;
+      padding: 0.8rem 1rem; background: var(--white);
+      border: 1px dashed var(--line); border-radius: 3px;
+      margin-top: 1rem; display: inline-block;
+    }
+
+    /* ── GALLERY ── */
+    #photos { background: var(--cream); }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 4px;
+    }
+    .photo-slot {
+      position: relative; overflow: hidden;
+      aspect-ratio: 4/3;
+      background: var(--cream2);
+      border: 1px solid var(--line);
+      border-radius: 2px; cursor: zoom-in;
+    }
+    .photo-slot img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .photo-slot:hover img { transform: scale(1.05); }
+    .photo-slot.empty { cursor: default; }
+    .photo-slot.empty::after {
+      content: ''; position: absolute; inset: 0;
+      background: var(--cream2);
+    }
+    .photo-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 0.5rem 0.7rem;
+      background: linear-gradient(transparent, rgba(24,24,27,0.55));
+      font-family: 'DM Mono', monospace;
+      font-size: 0.56rem; color: rgba(248,245,240,0.7);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .photo-slot:hover .photo-caption { opacity: 1; }
+    .gallery-note {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em;
+      margin-bottom: 1.5rem; padding: 0.7rem 1rem;
+      border: 1px solid var(--line); border-radius: 3px;
+      display: inline-block; background: var(--white);
+    }
+
+    /* ── CERTIFICATIONS ── */
+    #certifications { background: var(--cream2); }
+    .cert-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+    .cert-card {
+      background: var(--white); border: 1px solid var(--line);
+      border-radius: 3px; padding: 1.5rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .cert-card:hover { border-bottom-color: var(--gold); transform: translateY(-3px); }
+    .cert-issuer {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .cert-name { font-size: 0.88rem; font-weight: 600; color: var(--ink); margin-top: 0.5rem; line-height: 1.4; }
+
+    /* ── LANGUAGES ── */
+    #languages { background: var(--ink); }
+    #languages .sec-title { color: var(--cream); }
+    #languages .sec-num { color: var(--gold2); }
+    #languages .sec-line { background: rgba(248,245,240,0.1); }
+    .lang-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 1rem; }
+    .lang-card {
+      background: rgba(248,245,240,0.04);
+      border: 1px solid rgba(248,245,240,0.08);
+      border-radius: 4px; padding: 1.8rem 1rem; text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .lang-card:hover { border-color: rgba(184,151,61,0.35); transform: translateY(-4px); }
+    .lang-flag { font-size: 2rem; }
+    .lang-name { font-size: 0.85rem; font-weight: 600; color: var(--cream); margin-top: 0.7rem; }
+    .lang-level {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.54rem; color: rgba(248,245,240,0.3); letter-spacing: 0.08em; margin-top: 0.3rem;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--cream2); text-align: center; padding: 8rem 4rem; }
+    .contact-pre {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem; color: var(--gold); letter-spacing: 0.22em;
+      text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .contact-h {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      font-weight: 500; color: var(--ink); line-height: 1.15;
+      letter-spacing: -0.01em; margin-bottom: 1rem;
+    }
+    .contact-h em { font-style: italic; color: var(--gold2); }
+    .contact-p { font-size: 0.95rem; color: var(--ink2); margin: 0 auto 2.5rem; max-width: 420px; line-height: 1.75; }
+    .contact-btns { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .contact-btn {
+      padding: 0.8rem 2rem;
+      border: 1px solid var(--line); background: var(--white);
+      color: var(--ink2); font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+      border-radius: 2px; transition: all 0.2s;
+    }
+    .contact-btn:hover { border-color: var(--ink); color: var(--ink); }
+    .contact-btn.primary { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+    .contact-btn.primary:hover { opacity: 0.85; transform: translateY(-2px); }
+
+    footer {
+      background: var(--ink);
+      padding: 1.5rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-txt {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.56rem; color: rgba(248,245,240,0.2); letter-spacing: 0.08em;
+    }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @keyframes fadeUp   { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
+    @keyframes fadeLeft { from { opacity:0; transform:translateX(26px); } to { opacity:1; transform:none; } }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      position: fixed; inset: 0; background: rgba(24,24,27,0.92);
+      z-index: 9999; display: flex; align-items: center; justify-content: center;
+      cursor: zoom-out; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lightbox img { max-width: 90vw; max-height: 88vh; object-fit: contain; border-radius: 2px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1rem; }
+      section { padding: 4rem 1.5rem; }
+      .hero { padding: 7rem 1.5rem 3rem; }
+      .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-numbers { flex-direction: row; flex-wrap: wrap; }
+      .hero-num-card { flex: 1; min-width: 140px; }
+      .about-grid, .edu-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .awards-grid, .cert-grid { grid-template-columns: 1fr; }
+      .lang-grid { grid-template-columns: repeat(3,1fr); }
+      .exp-item { grid-template-columns: 1fr; gap: 0.4rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Valentin Angenot</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#achievements">Awards</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#photos">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="cv.pdf" target="_blank" class="nav-cv">CV ↓</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-label">Portfolio · 2025</p>
+
+      <div class="hero-name-row">
+        <h1 class="hero-name">Valentin<br><em>Angenot</em></h1>
+        <!-- Replace photos/profile.jpg with your actual photo in the repo -->
+        <div class="hero-photo">
+          <img src="photos/profile.jpg" alt="Valentin Angenot"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <div class="hero-photo-placeholder" style="display:none">
+            <span class="ph-ico">👤</span>
+            <span>Add<br>photo</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="hero-role">Engineer bridging <strong>Strategy, Finance, Technology &amp; AI</strong> — with a dual Master's in Business Engineering and Industrial Engineering. Valedictorian.</p>
+
+      <!-- CFA — prominent -->
+      <div class="cfa-badge">
+        <span class="cfa-label">CFA Institute</span>
+        <span class="cfa-value">Level I — Passed ✓</span>
+      </div>
+
+      <div class="hero-chips">
+        <span class="chip">Strategy</span>
+        <span class="chip">M&amp;A · Valuation</span>
+        <span class="chip">AI · LLM</span>
+        <span class="chip">Industrial Engineering</span>
+        <span class="chip">Research</span>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Get in touch</a>
+        <a href="https://www.linkedin.com/in/valentinangenot" target="_blank" class="btn-outline">LinkedIn ↗</a>
+        <a href="cv.pdf" target="_blank" class="btn-outline">Download CV ↓</a>
+      </div>
+    </div>
+
+    <!-- Key stats -->
+    <div class="hero-numbers">
+      <div class="hero-num-card">
+        <div class="hn-val">MSc</div>
+        <div class="hn-label">Business Engineering<br>HEC Liège — Valedictorian</div>
+      </div>
+      <div class="hero-num-card">
+        <div class="hn-val">MEng</div>
+        <div class="hn-label">Industrial Engineering<br>HELMo Haute École</div>
+      </div>
+      <div class="hero-num-card clickable" onclick="window.open('https://auvio.rtbf.be/media/tendances-premiere-tendances-premiere-le-dossier-3417149','_blank')">
+        <div class="hn-val prize">🎖️ Jury Prize</div>
+        <div class="hn-label">Digital Transformation Thesis<br>▶ RTBF Interview ↗</div>
+      </div>
+      <div class="hero-num-card">
+        <div class="hn-val">2<sup style="font-size:1rem;vertical-align:super">nd</sup></div>
+        <div class="hn-label">CFA Research Challenge<br>Benelux — 20 universities</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-hd reveal">
+    <span class="sec-num">01 —</span>
+    <h2 class="sec-title">About</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>Graduated as <strong>Valedictorian</strong> with a dual background in Industrial Engineering and Business Engineering, I build bridges between technical rigour and strategic thinking.</p>
+      <p>Former <strong>Teaching Assistant</strong> in Strategy, Digital Transformation, Corporate Finance, Physics, Mathematics and Supply Chain — guiding hundreds of students through complex subjects at HEC Liège and the Faculty of Medicine.</p>
+      <p>Aiming to contribute to <strong>high-impact strategic roles</strong> in business, technology, or finance.</p>
+    </div>
+    <div class="skills-table">
+      <div class="skill-row"><span class="skill-key">Strategy</span><span class="skill-val">Corporate, Digital, Industry 4.0, Consulting</span></div>
+      <div class="skill-row"><span class="skill-key">Finance</span><span class="skill-val">Valuation, M&amp;A, PE, VC, Equity Research</span></div>
+      <div class="skill-row"><span class="skill-key">AI &amp; LLM</span><span class="skill-val">NLP Pipelines, Clinical AI, Topic Detection</span></div>
+      <div class="skill-row"><span class="skill-key">Engineering</span><span class="skill-val">Industrial Ops, Supply Chain, Cost Modelling</span></div>
+      <div class="skill-row"><span class="skill-key">Teaching</span><span class="skill-val">Finance, Physics, Maths, Strategy, Healthcare</span></div>
+      <div class="skill-row"><span class="skill-key">Research</span><span class="skill-val">Public Health, Long COVID, Clinical NLP</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sec-hd reveal">
+    <span class="sec-num">02 —</span>
+    <h2 class="sec-title">Experience</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="exp-item reveal">
+    <div class="exp-date">Sep 2025 → Present</div>
+    <div>
+      <div class="exp-title">Engineer — Field Operations</div>
+      <div class="exp-org">CILE · Liège</div>
+      <div class="exp-desc">Full setup of a field operations unit: technical analysis, equipment sourcing, regulatory compliance, and cost modelling.</div>
+      <span class="tag">Operations</span><span class="tag">Cost Modelling</span><span class="tag">Compliance</span>
+    </div>
+  </div>
+
+  <div class="exp-item reveal">
+    <div class="exp-date">Jul 2025 → Feb 2026</div>
+    <div>
+      <div class="exp-title">AI Engineer</div>
+      <div class="exp-org">University of Liège · Research</div>
+      <div class="exp-desc">Designing an AI architecture for structuring and interpreting clinical data in a public health research project on Long COVID (ULiège × University of Rouen). Applying language models to extract insights from complex medical information.</div>
+      <span class="tag">LLM</span><span class="tag">Clinical NLP</span><span class="tag">Public Health</span>
+    </div>
+  </div>
+
+  <div class="exp-item reveal">
+    <div class="exp-date">Jan 2025 → Present</div>
+    <div>
+      <div class="exp-title">Student Instructor — Corporate Finance &amp; Strategic Financial Analysis</div>
+      <div class="exp-org">HEC Liège · Prof. M. Lambert</div>
+      <div class="exp-desc">Teaching corporate finance and strategic financial analysis to master's students.</div>
+      <span class="tag">Corporate Finance</span><span class="tag">Valuation</span>
+    </div>
+  </div>
+
+  <div class="exp-item reveal">
+    <div class="exp-date">Sep 2024 → Feb 2026</div>
+    <div>
+      <div class="exp-title">Teaching Assistant — Strategy, Digital Transformation &amp; Management</div>
+      <div class="exp-org">Faculty of Medicine, ULiège · Prof. N. Neysen</div>
+      <div class="exp-desc">Strategic management of health organisations and digital transition in healthcare. Mentoring master's students on strategic healthcare projects.</div>
+      <span class="tag">Healthcare Strategy</span><span class="tag">Digital Health</span>
+    </div>
+  </div>
+
+  <div class="exp-item reveal">
+    <div class="exp-date">Sep 2024 → Sep 2025</div>
+    <div>
+      <div class="exp-title">AI Engineer</div>
+      <div class="exp-org">AIASHI</div>
+      <div class="exp-desc">Driving a major strategic initiative on large-scale textual analysis. Built an advanced LLM-powered pipeline processing over 100,000 documents, significantly boosting topic detection accuracy and the strategic value of insights delivered to partners.</div>
+      <span class="tag">LLM Pipeline</span><span class="tag">Topic Detection</span><span class="tag">NLP at Scale</span>
+    </div>
+  </div>
+
+  <div class="exp-item reveal">
+    <div class="exp-date">Sep 2024 → May 2025</div>
+    <div>
+      <div class="exp-title">Equity Research Analyst</div>
+      <div class="exp-org">CFA Institute Research Challenge · Benelux</div>
+      <div class="exp-desc">Full sell-side equity research on Just Eat Takeaway.com (Euronext: TKWY) — SELL recommendation with 18.5% downside potential. Presented before industry professionals at Euronext Amsterdam. Ranked 2nd among 20 Benelux universities.</div>
+      <span class="tag">Equity Research</span><span class="tag">Valuation</span><span class="tag">DCF</span><span class="tag">🥈 2nd Place</span>
+    </div>
+  </div>
+
+  <div class="exp-item reveal">
+    <div class="exp-date">Sep 2023 → Feb 2026</div>
+    <div>
+      <div class="exp-title">Teaching Assistant — Strategy &amp; Digital Transformation</div>
+      <div class="exp-org">HEC Liège · Prof. M. Lambert</div>
+      <div class="exp-desc">Digital Strategy, Corporate Strategy, Industry 4.0, Tech/Strategic Consulting. Supervised team projects with companies and MecaTech (Walloon Competitiveness Cluster in Mechanical Engineering).</div>
+      <span class="tag">Digital Strategy</span><span class="tag">Industry 4.0</span>
+    </div>
+  </div>
+
+  <div class="exp-item reveal">
+    <div class="exp-date">Sep 2024 → Aug 2025</div>
+    <div>
+      <div class="exp-title">Student Instructor — Mathematics &amp; Supply Chain Management</div>
+      <div class="exp-org">HEC Liège · Prof. V. Henry &amp; Prof. S. Limbourg</div>
+      <div class="exp-desc">Infinitesimal Analysis and Supply Chain Management for undergraduate students.</div>
+      <span class="tag">Mathematics</span><span class="tag">Supply Chain</span>
+    </div>
+  </div>
+
+  <div class="exp-item reveal">
+    <div class="exp-date">Sep 2022 → Sep 2025</div>
+    <div>
+      <div class="exp-title">Student Instructor — Physics &amp; Finance / Accounting</div>
+      <div class="exp-org">HEC Liège · Prof. P. Deneye &amp; Prof. G. Capodici</div>
+      <div class="exp-desc">3 years teaching Physics and 3 years teaching Finance &amp; Accounting to undergraduate students.</div>
+      <span class="tag">Physics</span><span class="tag">Accounting</span><span class="tag">Finance</span>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="achievements">
+  <div class="sec-hd reveal">
+    <span class="sec-num">03 —</span>
+    <h2 class="sec-title">Honours &amp; Awards</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="awards-grid reveal">
+    <div class="award-card">
+      <div class="award-icon">🏅</div>
+      <div class="award-title">Valedictorian — Major de Promotion</div>
+      <div class="award-body">Graduated top of the entire cohort at HEC Liège with the highest academic distinction.</div>
+    </div>
+    <div class="award-card">
+      <div class="award-icon">🏆</div>
+      <div class="award-title">2nd Place — CFA Research Challenge Benelux</div>
+      <div class="award-body">Ranked 2nd among 20 top universities across the Benelux in the world's most demanding equity research competition. Presented at Euronext Amsterdam.</div>
+    </div>
+    <div class="award-card featured">
+      <div class="award-icon">🎖️</div>
+      <div class="award-title">Jury Prize — Digital Transformation Thesis</div>
+      <div class="award-body">Special jury award for outstanding thesis on digital transformation, recognised for analytical depth and strategic insight by the panel.</div>
+      <a class="award-link" href="https://auvio.rtbf.be/media/tendances-premiere-tendances-premiere-le-dossier-3417149" target="_blank">▶ Listen to the RTBF Interview</a>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="sec-hd reveal">
+    <span class="sec-num">04 —</span>
+    <h2 class="sec-title">Education</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="edu-grid reveal">
+    <div class="edu-card">
+      <div class="edu-year">2025</div>
+      <div class="edu-school">HEC Liège</div>
+      <div class="edu-degree">Master of Science — Business Engineering, Science &amp; Technology</div>
+      <div class="edu-period">2023 — June 2025</div>
+      <div class="edu-note">★ Valedictorian · Jury Prize — Digital Transformation</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2026</div>
+      <div class="edu-school">HELMo Haute École</div>
+      <div class="edu-degree">Master of Engineering — Industrial Engineering</div>
+      <div class="edu-period">2023 — June 2026</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2023</div>
+      <div class="edu-school">HEC Liège</div>
+      <div class="edu-degree">Bachelor's Degree — Business Engineering</div>
+      <div class="edu-period">September 2020 — June 2023</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2019</div>
+      <div class="edu-school">Athénée Royal Thil Lorrain</div>
+      <div class="edu-degree">CESS — Mathematics · Sciences · English · Dutch</div>
+      <div class="edu-period">2013 — 2019</div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="sec-hd reveal">
+    <span class="sec-num">05 —</span>
+    <h2 class="sec-title">Publications</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="pub-list reveal">
+    <div class="pub-card">
+      <div class="pub-idx">01 —</div>
+      <div>
+        <div class="pub-title">Long COVID, Invisible Illness</div>
+        <div class="pub-meta">Research publication · University of Liège · Public Health</div>
+      </div>
+    </div>
+    <div class="pub-card">
+      <div class="pub-idx">02 —</div>
+      <div>
+        <div class="pub-title">Large Language Models in Belgian Primary Care: Clinical Applications, Ethical Challenges, and Epistemological Reflections</div>
+        <div class="pub-meta">Research publication · AI in Healthcare · ULiège / Faculty of Medicine</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sec-hd reveal">
+    <span class="sec-num">06 —</span>
+    <h2 class="sec-title">Projects</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="projects-grid reveal">
+
+    <!-- ── PROJECT TEMPLATE ── copy & paste this block to add a project
+    <div class="project-card">
+      <div class="project-tag">Finance · 2025</div>
+      <div class="project-title">Your Project Title</div>
+      <div class="project-desc">A short description of the project — what it was, what you did, what the outcome was.</div>
+      <a href="projects/yourfile.pdf" target="_blank" class="project-link">View PDF ↗</a>
+    </div>
+    -->
+
+    <div class="project-card">
+      <div class="project-tag">Equity Research · 2025</div>
+      <div class="project-title">Just Eat Takeaway.com — Initiating Coverage</div>
+      <div class="project-desc">Full sell-side research report on Just Eat Takeaway.com (Euronext: TKWY). SELL recommendation with 18.5% downside. Presented at Euronext Amsterdam as part of the CFA Research Challenge — 2nd place Benelux.</div>
+      <!-- Upload your PDF to a projects/ folder and update the link below -->
+      <!-- <a href="projects/cfa-research-just-eat.pdf" target="_blank" class="project-link">View report ↗</a> -->
+    </div>
+
+    <div class="project-card">
+      <div class="project-tag">AI · 2025</div>
+      <div class="project-title">LLM Pipeline for Large-Scale Textual Analysis</div>
+      <div class="project-desc">Built an advanced LLM-powered pipeline processing over 100,000 documents, significantly boosting topic detection accuracy and delivering strategic insights at scale.</div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-tag">Healthcare AI · 2025</div>
+      <div class="project-title">Clinical AI Architecture — Long COVID Research</div>
+      <div class="project-desc">Designed an AI architecture for structuring and interpreting clinical data in a joint public health research project (ULiège × University of Rouen), applying language models to complex medical datasets.</div>
+    </div>
+
+  </div>
+  <p class="project-add-note reveal">// To add a project: duplicate a project-card block in the HTML and upload your PDF to a projects/ folder in the repo</p>
+</section>
+
+<!-- GALLERY -->
+<section id="photos">
+  <div class="sec-hd reveal">
+    <span class="sec-num">07 —</span>
+    <h2 class="sec-title">Gallery</h2>
+    <div class="sec-line"></div>
+  </div>
+  <p class="gallery-note reveal">// Upload photos to a photos/ folder in your repo — name them photo1.jpg, photo2.jpg, etc.</p>
+  <div class="photo-grid reveal">
+    <div class="photo-slot" onclick="openLightbox('photos/photo1.jpg')">
+      <img src="photos/photo1.jpg" alt="" onerror="this.parentElement.classList.add('empty'); this.parentElement.style.cursor='default'">
+      <div class="photo-caption">01</div>
+    </div>
+    <div class="photo-slot" onclick="openLightbox('photos/photo2.jpg')">
+      <img src="photos/photo2.jpg" alt="" onerror="this.parentElement.classList.add('empty'); this.parentElement.style.cursor='default'">
+      <div class="photo-caption">02</div>
+    </div>
+    <div class="photo-slot" onclick="openLightbox('photos/photo3.jpg')">
+      <img src="photos/photo3.jpg" alt="" onerror="this.parentElement.classList.add('empty'); this.parentElement.style.cursor='default'">
+      <div class="photo-caption">03</div>
+    </div>
+    <div class="photo-slot" onclick="openLightbox('photos/photo4.jpg')">
+      <img src="photos/photo4.jpg" alt="" onerror="this.parentElement.classList.add('empty'); this.parentElement.style.cursor='default'">
+      <div class="photo-caption">04</div>
+    </div>
+    <div class="photo-slot" onclick="openLightbox('photos/photo5.jpg')">
+      <img src="photos/photo5.jpg" alt="" onerror="this.parentElement.classList.add('empty'); this.parentElement.style.cursor='default'">
+      <div class="photo-caption">05</div>
+    </div>
+    <div class="photo-slot" onclick="openLightbox('photos/photo6.jpg')">
+      <img src="photos/photo6.jpg" alt="" onerror="this.parentElement.classList.add('empty'); this.parentElement.style.cursor='default'">
+      <div class="photo-caption">06</div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="sec-hd reveal">
+    <span class="sec-num">08 —</span>
+    <h2 class="sec-title">Certifications</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="cert-grid reveal">
+    <div class="cert-card">
+      <div class="cert-issuer">CFA Institute</div>
+      <div class="cert-name">CFA Level I — Passed</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">Coursera / Erasmus University</div>
+      <div class="cert-name">Advanced Valuation and Strategy — M&amp;A, Private Equity &amp; Venture Capital</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">CFI</div>
+      <div class="cert-name">FMI Foundations in Financial Modeling</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">Coursera</div>
+      <div class="cert-name">Digital Twins</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">Coursera / Yale University</div>
+      <div class="cert-name">Financial Markets</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">Belgian National Education</div>
+      <div class="cert-name">CESS — Secondary Education Certificate</div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section id="languages">
+  <div class="sec-hd reveal">
+    <span class="sec-num">09 —</span>
+    <h2 class="sec-title">Languages</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="lang-grid reveal">
+    <div class="lang-card"><div class="lang-flag">🇫🇷</div><div class="lang-name">French</div><div class="lang-level">Native / Bilingual</div></div>
+    <div class="lang-card"><div class="lang-flag">🇬🇧</div><div class="lang-name">English</div><div class="lang-level">Full Professional</div></div>
+    <div class="lang-card"><div class="lang-flag">🇪🇸</div><div class="lang-name">Spanish</div><div class="lang-level">Full Professional</div></div>
+    <div class="lang-card"><div class="lang-flag">🇳🇱</div><div class="lang-name">Dutch</div><div class="lang-level">Elementary</div></div>
+    <div class="lang-card"><div class="lang-flag">🇮🇹</div><div class="lang-name">Italian</div><div class="lang-level">Elementary</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="contact-pre reveal">// Let's connect</p>
+  <h2 class="contact-h reveal">Open to <em>high-impact</em><br>opportunities.</h2>
+  <p class="contact-p reveal">Strategy · Finance · AI · Engineering.<br>If you're building something ambitious, I'd love to hear about it.</p>
+  <div class="contact-btns reveal">
+    <a href="mailto:val.angenot@icloud.com" class="contact-btn primary">✉ Email me</a>
+    <a href="https://www.linkedin.com/in/valentinangenot" target="_blank" class="contact-btn">LinkedIn ↗</a>
+    <a href="cv.pdf" target="_blank" class="contact-btn">Download CV ↓</a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-txt">© 2025 Valentin Angenot</span>
+  <span class="footer-txt">Strategy · Finance · AI · Engineering</span>
+</footer>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  function openLightbox(src) {
+    const t = new Image();
+    t.onload = () => {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+    t.src = src;
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+</body>
+</html>
