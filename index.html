@@ -71,6 +71,7 @@
     .hero {
       display: grid;
       grid-template-columns: 1fr 42%;
+      min-height: 100vh
       grid-template-rows: 1fr auto;
       position: relative;
     }
@@ -208,7 +209,6 @@
     .hero-right {
       position: relative;
       overflow: hidden;
-      height: 100vh;
       opacity: 0; animation: fadeIn 1s ease forwards 0.3s;
       grid-column: 2; grid-row: 1;
     }
