@@ -26,6 +26,16 @@
     .loader-line{width:80px;height:1px;background:var(--gold2);transform:scaleX(0);transition:transform 0.8s cubic-bezier(0.65,0,0.35,1) 0.3s}
     .loader-sub{font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);opacity:0;transform:translateY(8px);transition:all 0.6s ease 0.6s}
 
+    /*<!-- Google Analytics -->*/
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5FZXJEXTGJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5FZXJEXTGJ');
+</script>
+    
     /* ── SCROLL PROGRESS ── */
     .scroll-progress{position:fixed;top:0;left:0;z-index:300;width:0%;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold2),var(--gold));background-size:200% 100%;animation:shimmer 2s linear infinite}
     @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
